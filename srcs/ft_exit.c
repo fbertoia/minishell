@@ -2,6 +2,6 @@
 
 int ft_exit(char *argv[], char *envp[], t_data *data)
 {
-  ft_printf("fonction env\n");
+  exit(EXIT_SUCCESS);
   return (1);
 }

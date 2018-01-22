@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int prompt(t_data *data)
+int prompt(void)
 {
 	if (sig)
 		ft_printf("%[GRN]$>%[NC]");
