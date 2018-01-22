@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 #include "minishell.h"
+#include<stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
@@ -23,7 +24,7 @@
 
 #define NUMBER_BUILTIN 6
 
-int sig = 1;
+extern int sig;
 
 typedef struct    s_data
 {
@@ -37,13 +38,15 @@ typedef struct    s_data
   int *wait;
 }                 t_data;
 
-int prompt(t_data *data);
+int prompt(void);
 
 int ft_strindexstr(char *dest[NUMBER_BUILTIN], char *src);
 int copyenv(t_data *data, char **environ);
-void setpath(t_data *data);
+void setpath(char **env, char ***paths);
 int callsystem(char *argv[], char *envp[], t_data *data);
 int callfunction(t_data *data);
+int ft_strindexstr(char *dest[NUMBER_BUILTIN], char *src);
+void handlesig(int num);
 
 
 int cd(char *argv[], char *envp[], t_data *data);
@@ -53,5 +56,7 @@ int ft_exit(char *argv[], char *envp[], t_data *data);
 int ft_setenv(char *argv[], char *envp[], t_data *data);
 int ft_unsetenv(char *argv[], char *envp[], t_data *data);
 
+void del_arrstr(char ***arr);
+void delstr(int nb_args, ...);
 
 #endif
