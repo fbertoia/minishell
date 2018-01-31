@@ -1,16 +1,18 @@
 #include "minishell.h"
 
-void del_arrstr(char ***arr)
+void del_args(char ***args)
 {
   int i;
-  
+
   i = 0;
-  while ((*arr)[i])
+  if (!*args)
+  	return ;
+  while ((*args)[i])
   {
-    ft_memdel((void**)&((*arr)[i]));
+    free((*args)[i]);
     i++;
   }
-  ft_memdel((void**)*arr);
+  free(*args);
 }
 
 void delstr(int nb_args, ...)
@@ -18,7 +20,7 @@ void delstr(int nb_args, ...)
   va_list ap;
   int i;
   char *tmp;
-  
+
   i = 0;
   va_start(ap, nb_args);
   while (i < nb_args)

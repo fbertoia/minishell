@@ -12,14 +12,14 @@
 
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g  -fsanitize=address
 INCLUDES = includes
 INCLUDES_H = includes/minishell.h
 INCLUDES_LIBFT = ./libft/includes
 DIR_MINISHELL = srcs
 SRCS_MINISHELL = $(addprefix $(DIR_MINISHELL)/, minishell.c prompt.c cd.c \
 echo.c env.c ft_exit.c ft_setenv.c ft_unsetenv.c callsystem.c copyenv.c \
-callfunction.c setpath.c utils.c handlesig.c del.c)
+callfunction.c setpath.c handlesig.c del.c ft_strjoin_multiple.c)
 
 LIB_DIR = ./libft
 LIB_PATH = $(LIB_DIR)/libft.a
