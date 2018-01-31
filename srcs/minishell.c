@@ -12,28 +12,31 @@
 
 #include "minishell.h"
 
-int sig;
+int g_sig;
 
 int  main(int ac, char **av)
 {
 	t_data data;
 	extern char **environ;
 
-	sig = 1;
+	g_sig = 0;
 	data.i = 1;
 	data.s = NULL;
-	data.parent = 0;
 	data.wait = NULL;
 	data.env = NULL;
+	data.split_args = NULL;
+	data->old_dir[0] = '\0';
 	copyenv(&data, environ);
 	while (42)
 	{
-		waitpid(0, data.wait, 0);
-		signal(SIGINT, handlesig);
+		data.parent = 0;
 		prompt();
-		get_next_line(0, &data.s, 1);
-		data.split_args = ft_strsplit(data.s, ' ');
+		signal(SIGINT, handlesig);
+		get_next_line(0, &data.s);
+		data.split_args = ft_strsplitwhitespace(data.s);
 		ft_memdel((void**)&data.s);
-		sig = callfunction(&data);
+		if (data.split_args && data.split_args[0])
+			g_sig = callfunction(&data);
+		del_args(&data.split_args);
 	}
 }

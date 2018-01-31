@@ -26,7 +26,7 @@ int callfunction(t_data *data)
 
   i = 0;
   if ((i = find_builtin(data->split_args[0])) >= 0)
-    return (ft_builtin[i](data->split_args + 1, data->env, data));
+    return (ft_builtin[i](data->split_args, data->env, data));
   else
-    return (data->i = callsystem(data->split_args + 1, data->env, data));
+    return (data->i = callsystem(data->split_args, data->env, data));
 }

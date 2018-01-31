@@ -14,7 +14,16 @@
 # define LIBFT_H
 
 # include <string.h>
-# include "ft_printf.h"
+# include <limits.h>
+# define BUFF_SIZE_GNL 4028
+
+typedef struct		s_get
+{
+	char			content[BUFF_SIZE_GNL];
+	struct s_get	*fd_ptr[OPEN_MAX];
+	int				first;
+	struct s_get	*next;
+}					t_get;
 
 typedef struct		s_list
 {
@@ -102,11 +111,11 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 void				ft_sortstrings(char **ptr, size_t size,
 					int (*f)(char *, char *));
 int					ft_min(int a, int b);
-int					get_next_line(const int fd, char **line, int i);
+int					get_next_line(const int fd, char **line);
+char				**ft_strsplitwhitespace(char *str);
 
 
 # define MY_INT_MAX 2147483647
 # define MY_INT_MIN -2147483648
 
 #endif
- 
