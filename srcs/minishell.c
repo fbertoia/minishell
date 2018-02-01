@@ -13,6 +13,7 @@
 #include "minishell.h"
 
 int g_sig;
+int g_prompt;
 
 int  main(int ac, char **av)
 {
@@ -25,18 +26,25 @@ int  main(int ac, char **av)
 	data.wait = NULL;
 	data.env = NULL;
 	data.split_args = NULL;
-	data->old_dir[0] = '\0';
+	data.old_dir[0] = '\0';
 	copyenv(&data, environ);
+	signal(SIGINT, handlesig);
 	while (42)
 	{
+		g_prompt = 1;
 		data.parent = 0;
 		prompt();
-		signal(SIGINT, handlesig);
 		get_next_line(0, &data.s);
 		data.split_args = ft_strsplitwhitespace(data.s);
 		ft_memdel((void**)&data.s);
 		if (data.split_args && data.split_args[0])
+		{
+			g_prompt = 0;
 			g_sig = callfunction(&data);
+		}
 		del_args(&data.split_args);
 	}
+	del_args(&data.env);
 }
+
+//recoder errno

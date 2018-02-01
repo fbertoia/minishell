@@ -42,7 +42,6 @@ int callsystem(char **av, char **env, t_data *data)
 	else
 	{
 		data->parent = waitpid(data->parent, &(data->status), WUNTRACED);
-		ft_printf("data->status = %d\n", data->status);
 		return (data->status);
 	}
 }

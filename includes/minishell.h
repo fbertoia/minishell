@@ -30,6 +30,7 @@
 # define NUMBER_BUILTIN 6
 
 extern int g_sig;
+extern int g_prompt;
 
 typedef struct    s_data
 {
