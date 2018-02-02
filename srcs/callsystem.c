@@ -1,16 +1,15 @@
 #include "minishell.h"
 #include <sys/wait.h>
 
-int findpath(char *called_f, char **env, t_data *data)
+int findpath(char *called_f, t_env *env, t_data *data)
 {
 	char **split_paths;
-	char *test_path;
 	int i = 0;
+	t_env *tmp;
 
-	test_path = NULL;
-	split_paths = NULL;
-	setpath(env, &split_paths);
-	while (split_paths[i])
+	tmp = elem_name(env, "PATH");
+	split_paths = ft_strsplit(tmp ? tmp->value : "", ':');
+	while (split_paths && split_paths[i])
 	{
 		if ((data->path = ft_strjoin_multiple(3, split_paths[i], "/", called_f)) == NULL)
 			exit(EXIT_FAILURE);
@@ -22,10 +21,11 @@ int findpath(char *called_f, char **env, t_data *data)
 	}
 	if (!data->path)
 		data->path = ft_strdup(called_f);
+	del_args(&split_paths);
 	return (1);
 }
 
-int callsystem(char **av, char **env, t_data *data)
+int callsystem(char **av, t_env **env, t_data *data)
 {
 	if((data->parent = fork()) == -1)
 	{
@@ -34,8 +34,8 @@ int callsystem(char **av, char **env, t_data *data)
 	}
 	if (!data->parent)
 	{
-		findpath(data->split_args[0], env, data);
-		g_sig = execve(data->path, av, env);
+		findpath(data->split_args[0], data->env, data);
+		g_sig = execve(data->path, av, copy_arr_env(data, *env));
 		perror("");
 		exit(EXIT_FAILURE);
 	}

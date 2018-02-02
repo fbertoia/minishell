@@ -27,6 +27,8 @@ int  main(int ac, char **av)
 	data.env = NULL;
 	data.split_args = NULL;
 	data.old_dir[0] = '\0';
+	data.arr_env = NULL;
+	data.path = NULL;
 	copyenv(&data, environ);
 	signal(SIGINT, handlesig);
 	while (42)
@@ -40,11 +42,14 @@ int  main(int ac, char **av)
 		if (data.split_args && data.split_args[0])
 		{
 			g_prompt = 0;
-			g_sig = callfunction(&data);
+			g_sig = callfunction(&data, &data.env);
 		}
+		print_env(data.env);
 		del_args(&data.split_args);
+		del_args(&data.arr_env);
+		delete_env(&data.copy_env);
+		ft_memdel((void**)data.path);
 	}
-	del_args(&data.env);
 }
 
 //recoder errno

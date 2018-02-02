@@ -9,10 +9,10 @@ void del_args(char ***args)
   	return ;
   while ((*args)[i])
   {
-    free((*args)[i]);
+    ft_memdel((void**)&(*args)[i]);
     i++;
   }
-  free(*args);
+  ft_memdel((void**)&(*args));
 }
 
 void delstr(int nb_args, ...)
@@ -30,4 +30,19 @@ void delstr(int nb_args, ...)
     i++;
   }
   va_end(ap);
+}
+
+void delete_env(t_env **env)
+{
+  t_env *tmp;
+
+  tmp = *env;
+  while (*env)
+  {
+    *env = (*env)->next;
+    ft_memdel((void**)&tmp->name);
+    ft_memdel((void**)&tmp->value);
+    ft_memdel((void**)&tmp);
+    tmp = *env;
+  }
 }

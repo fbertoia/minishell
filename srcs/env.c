@@ -15,8 +15,13 @@ char *get_envvar(char **env, char *str)
 	return (NULL);
 }
 
-int env(char *argv[], char *envp[], t_data *data)
+int ft_env(char *av[], t_env **env, t_data *data)
 {
-	ft_printf("fonction env\n");
-	return (1);
+	if (!av[1])
+	{
+		print_env(*env);
+		return (0);
+	}
+	
+	return (0);
 }

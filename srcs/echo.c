@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int echo(char *argv[], char *envp[], t_data *data)
+int echo(char *argv[], t_env **env, t_data *data)
 {
 	int i;
 	int flag;
