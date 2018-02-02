@@ -33,6 +33,11 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_void
+{
+	struct s_void *next;
+}					t_void;
+
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -114,6 +119,8 @@ int					ft_min(int a, int b);
 int					get_next_line(const int fd, char **line);
 char				**ft_strsplitwhitespace(char *str);
 
+int					size_list(void *a);
+void				*last_elem(void *a);
 
 # define MY_INT_MAX 2147483647
 # define MY_INT_MIN -2147483648
