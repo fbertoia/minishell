@@ -19,7 +19,7 @@ INCLUDES_LIBFT = ./libft/includes
 DIR_MINISHELL = srcs
 SRCS_MINISHELL = $(addprefix $(DIR_MINISHELL)/, minishell.c prompt.c cd.c \
 echo.c env.c ft_exit.c ft_setenv.c ft_unsetenv.c callsystem.c copyenv.c \
-callfunction.c setpath.c handlesig.c del.c ft_strjoin_multiple.c)
+callfunction.c handlesig.c del.c ft_strjoin_multiple.c print.c list.c)
 
 LIB_DIR = ./libft
 LIB_PATH = $(LIB_DIR)/libft.a
