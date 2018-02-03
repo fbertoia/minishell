@@ -6,20 +6,21 @@
 #    By: fbertoia <fbertoia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/16 11:38:20 by fbertoia          #+#    #+#              #
-#    Updated: 2018/01/22 02:02:48 by fbertoia         ###   ########.fr        #
+#    Updated: 2018/02/03 17:18:52 by fbertoia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -g  -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = includes
 INCLUDES_H = includes/minishell.h
 INCLUDES_LIBFT = ./libft/includes
 DIR_MINISHELL = srcs
 SRCS_MINISHELL = $(addprefix $(DIR_MINISHELL)/, minishell.c prompt.c cd.c \
 echo.c env.c ft_exit.c ft_setenv.c ft_unsetenv.c callsystem.c copyenv.c \
-callfunction.c handlesig.c del.c ft_strjoin_multiple.c print.c list.c)
+callfunction.c handlesig.c del.c ft_strjoin_multiple.c print.c list.c addenv.c\
+change_var.c)
 
 LIB_DIR = ./libft
 LIB_PATH = $(LIB_DIR)/libft.a
