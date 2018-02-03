@@ -34,4 +34,3 @@ int	change_var(t_env **env, char *name, char *value)
 	}
 	return (1);
 }
-

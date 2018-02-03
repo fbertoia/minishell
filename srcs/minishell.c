@@ -15,22 +15,28 @@
 int g_sig;
 int g_prompt;
 
-int  main(void)
+static void	initialize(t_data *data)
 {
-	t_data data;
 	extern char **environ;
 
 	g_sig = 0;
-	data.i = 1;
-	data.s = NULL;
-	data.wait = NULL;
-	data.env = NULL;
-	data.split_args = NULL;
-	data.old_dir[0] = '\0';
-	data.arr_env = NULL;
-	data.copy_env = NULL;
-	data.path = NULL;
-	copyenv(&data, environ);
+	data->i = 1;
+	data->s = NULL;
+	data->wait = NULL;
+	data->env = NULL;
+	data->split_args = NULL;
+	data->old_dir[0] = '\0';
+	data->arr_env = NULL;
+	data->copy_env = NULL;
+	data->path = NULL;
+	copyenv(data, environ);
+}
+
+int			main(void)
+{
+	t_data data;
+
+	initialize(&data);
 	signal(SIGINT, handlesig);
 	while (42)
 	{
@@ -45,12 +51,6 @@ int  main(void)
 			g_prompt = 0;
 			g_sig = callfunction(data.split_args, &data, &data.env);
 		}
-		del_args(&data.split_args);
-		del_args(&data.arr_env);
-		delstr(1, &data.path);
-		delete_env(&data.copy_env);
-		ft_memdel((void**)data.path);
+		free_all(&data);
 	}
 }
-
-//recoder errno

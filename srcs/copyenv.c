@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   copyenv.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbertoia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/03 22:30:15 by fbertoia          #+#    #+#             */
+/*   Updated: 2018/02/03 22:30:16 by fbertoia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_env *copy_elem(t_env *src)
+t_env	*copy_elem(t_env *src)
 {
 	t_env *tmp;
 
 	tmp = (t_env*)malloc(sizeof(t_env));
 	if (!tmp)
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	tmp->next = NULL;
 	tmp->name = ft_strdup(src->name);
 	tmp->value = ft_strdup(src->value);
 	return (tmp);
 }
 
-int	ft_copyenvlist(t_env *src, t_env **copy_env)
+int		ft_copyenvlist(t_env *src, t_env **copy_env)
 {
 	t_env *tmp;
 
@@ -31,10 +43,10 @@ int	ft_copyenvlist(t_env *src, t_env **copy_env)
 	return (1);
 }
 
-char **copy_arr_env(t_data *data, t_env *env)
+char	**copy_arr_env(t_data *data, t_env *env)
 {
-	t_env *tmp;
-	int i;
+	t_env	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = env;
@@ -48,7 +60,8 @@ char **copy_arr_env(t_data *data, t_env *env)
 	i = 0;
 	while (tmp)
 	{
-		if (!(data->arr_env[i++] = ft_strjoin_multiple(3, tmp->name, "=", tmp->value)))
+		if (!(data->arr_env[i++] = ft_strjoin_multiple(3,
+		tmp->name, "=", tmp->value)))
 			exit(EXIT_FAILURE);
 		tmp = tmp->next;
 	}
@@ -56,7 +69,7 @@ char **copy_arr_env(t_data *data, t_env *env)
 	return (data->arr_env);
 }
 
-int copyenv(t_data *data, char **environ)
+int		copyenv(t_data *data, char **environ)
 {
 	int i;
 

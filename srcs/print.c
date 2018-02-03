@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	print_env(t_env *env)
+int		print_env(t_env *env)
 {
 	while (env)
 	{
@@ -32,7 +32,7 @@ void	print_arr_env(char **arr_env)
 	}
 }
 
-int	print_message(char *message, char *function_name)
+int		print_message(char *message, char *function_name)
 {
 	if (ft_strequ(message, "malloc"))
 		ft_dprintf(2, "Malloc failure.\n");
@@ -50,5 +50,14 @@ int	print_message(char *message, char *function_name)
 		ft_dprintf(2, "%s: Insufficient memory.\n", function_name);
 	else if (ft_strequ(message, "E2BIG"))
 		ft_dprintf(2, "%s: Too many arguments.\n", function_name);
+	return (1);
+}
+
+int		print_usage_env(char c, int option)
+{
+	if (option == 2)
+		ft_dprintf(2, "env: option requires an argument -- %c\n", c);
+	ft_dprintf(2, "usage: env [-i] [-P utilpath] [-u name]\
+[name=value ...] [utility [argument ...]]\n");
 	return (1);
 }

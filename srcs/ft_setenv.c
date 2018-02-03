@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_setenv.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbertoia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/03 21:05:23 by fbertoia          #+#    #+#             */
+/*   Updated: 2018/02/03 21:05:26 by fbertoia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int check_args(char **av)
+static int	check_args(char **av)
 {
 	char *str;
 
@@ -17,7 +29,7 @@ alphanumeric characters.\n";
 	return (0);
 }
 
-int ft_setenv2(char *name, char *value, t_env **env)
+int			ft_setenv2(char *name, char *value, t_env **env)
 {
 	t_env *tmp;
 	t_env *new;
@@ -37,7 +49,7 @@ int ft_setenv2(char *name, char *value, t_env **env)
 	return (0);
 }
 
-int ft_setenv(char *av[], t_env **env, t_data *data)
+int			ft_setenv(char *av[], t_env **env, t_data *data)
 {
 	if (!av[1])
 		print_arr_env(data->arr_env);

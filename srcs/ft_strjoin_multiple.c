@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-char *ft_strjoin_multiple(int nb_args, ...)
+char	*ft_strjoin_multiple(int nb_args, ...)
 {
-	va_list ap;
-	int i;
-	char *tmp;
-	char *ret;
+	va_list	ap;
+	int		i;
+	char	*tmp;
+	char	*ret;
 
 	i = 1;
 	tmp = NULL;
@@ -28,7 +28,7 @@ char *ft_strjoin_multiple(int nb_args, ...)
 	while (i < nb_args)
 	{
 		tmp = ret;
-	  	if ((ret = ft_strjoin(tmp, va_arg(ap, char *))) == NULL)
+		if ((ret = ft_strjoin(tmp, va_arg(ap, char *))) == NULL)
 			return (NULL);
 		ft_memdel((void**)&tmp);
 		i++;
