@@ -61,12 +61,14 @@ int prompt(void);
 
 int copyenv(t_data *data, char **environ);
 char **copy_arr_env(t_data *data, t_env *env);
+int	ft_copyenvlist(t_env *src, t_env **copy_env);
+int	change_var(t_env **env, char *name, char *value);
 t_env *new_env_var(char *name, char *value);
-void	print_env(t_env *env);
+int	print_env(t_env *env);
 void	print_arr_env(char **env);
 void setpath(char **env, char ***paths);
 int callsystem(char *argv[], t_env **envp, t_data *data);
-int callfunction(t_data *data, t_env **env);
+int callfunction(char **args, t_data *data, t_env **env);
 void handlesig(int num);
 
 
@@ -74,9 +76,11 @@ int cd(char *argv[], t_env **env, t_data *data);
 int echo(char *argv[], t_env **env, t_data *data);
 int ft_exit(char *argv[], t_env **env, t_data *data);
 int ft_setenv(char *argv[], t_env **env, t_data *data);
+int ft_setenv2(char *name, char *value, t_env **env);
 int ft_unsetenv(char *argv[], t_env **env, t_data *data);
+int ft_unsetenv2(char *av, t_env **env);
 int ft_env(char *argv[], t_env **env, t_data *data);
-char *get_envvar(char **env, char *str);
+
 
 void del_args(char ***arr);
 void delstr(int nb_args, ...);

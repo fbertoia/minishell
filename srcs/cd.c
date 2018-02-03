@@ -1,28 +1,5 @@
 #include "minishell.h"
 
-int	change_var_cd(t_env **env, char *name, char *value)
-{
-	t_env *tmp;
-	t_env *needle;
-
-	needle = *env;
-	if ((tmp = elem_name(*env, name)))
-	{
-		ft_memdel((void**)&tmp->value);
-		tmp->value = ft_strdup(value ? value : "");
-	}
-	else
-	{
-		tmp = new_env_var(name, value);
-		needle = (t_env*)last_elem((void*)*env);
-		if (needle)
-			needle->next = tmp;
-		else
-			*env = tmp;
-	}
-	return (1);
-}
-
 int cd_shortcuts(t_env **env, t_data *data, char *var)
 {
 	int i;
@@ -37,8 +14,8 @@ int cd_shortcuts(t_env **env, t_data *data, char *var)
 	i = chdir(tmp->value);
 	if (i == -1)
 		return (print_message("EACCESS", 2));
-	change_var_cd(env, "OLDPWD", data->old_dir);
-	change_var_cd(env, "PWD", getcwd(data->old_dir, PATH_MAX));
+	change_var(env, "OLDPWD", data->old_dir);
+	change_var(env, "PWD", getcwd(data->old_dir, PATH_MAX));
 	return (0);
 }
 
@@ -70,7 +47,7 @@ int cd(char *argv[], t_env **env, t_data *data)
 		i = chdir(argv[1]);
 	if (i == -1)
 		return (print_message("EACCESS", 2));
-	change_var_cd(env, "OLDPWD", data->old_dir);
-	change_var_cd(env, "PWD", getcwd(data->old_dir, PATH_MAX));
+	change_var(env, "OLDPWD", data->old_dir);
+	change_var(env, "PWD", getcwd(data->old_dir, PATH_MAX));
 	return (1);
 }

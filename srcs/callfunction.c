@@ -18,15 +18,16 @@ int find_builtin(char *str)
 		return (-1);
 }
 
-int callfunction(t_data *data, t_env **env)
+int callfunction(char **args, t_data *data, t_env **env)
 {
 	static int (*ft_builtin[])(char **, t_env **, t_data *) =
 	{&cd, &echo, &ft_env, &ft_exit, &ft_setenv, &ft_unsetenv};
 	int i;
 
 	i = 0;
-	if ((i = find_builtin(data->split_args[0])) >= 0)
-		return (ft_builtin[i](data->split_args, env, data));
+	ft_printf("%[RED]Call function%[NC]\n");
+	if ((i = find_builtin(args[0])) >= 0)
+		return (ft_builtin[i](args, env, data));
 	else
-		return (data->i = callsystem(data->split_args, env, data));
+		return (data->i = callsystem(args, env, data));
 }

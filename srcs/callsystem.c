@@ -34,7 +34,7 @@ int callsystem(char **av, t_env **env, t_data *data)
 	}
 	if (!data->parent)
 	{
-		findpath(data->split_args[0], data->env, data);
+		findpath(av[0], data->env, data);
 		g_sig = execve(data->path, av, copy_arr_env(data, *env));
 		perror("");
 		exit(EXIT_FAILURE);

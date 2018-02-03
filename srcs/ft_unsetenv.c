@@ -4,6 +4,7 @@ int delete_envname(t_env *tmp)
 {
 	ft_memdel((void**)&tmp->name);
 	ft_memdel((void**)&tmp->value);
+	return (0);
 }
 
 int ft_unsetenv2(char *av, t_env **env)
@@ -11,11 +12,9 @@ int ft_unsetenv2(char *av, t_env **env)
 	t_env *tmp;
 	t_env *tmp2;
 
-	ft_printf("av = %s\n", av);
 	tmp = *env;
 	if (!av || !*env)
 		return (0);
-	ft_printf("av = %s, *env = %s \n", av, tmp->name);
 	if (ft_strequ(tmp->name, av))
 	{
 		*env = (*env)->next;
@@ -46,7 +45,6 @@ int ft_unsetenv(char *av[], t_env **env, t_data *data)
 	av++;
 	while (*av)
 	{
-		ft_printf("av = %s\n", *av);
 		ret += ft_unsetenv2(*av, env);
 		av++;
 	}

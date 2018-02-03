@@ -1,5 +1,37 @@
 #include "minishell.h"
 
+t_env *copy_elem(t_env *src)
+{
+	t_env *tmp;
+
+	tmp = (t_env*)malloc(sizeof(t_env));
+	if (!tmp)
+		exit (EXIT_FAILURE);
+	tmp->next = NULL;
+	tmp->name = ft_strdup(src->name);
+	tmp->value = ft_strdup(src->value);
+	return (tmp);
+}
+
+int	ft_copyenvlist(t_env *src, t_env **copy_env)
+{
+	t_env *tmp;
+
+	if (!src)
+		return (1);
+	*copy_env = copy_elem(src);
+	tmp = *copy_env;
+	src = src->next;
+	while (src)
+	{
+		tmp->next = copy_elem(src);
+		tmp = tmp->next;
+		src = src->next;
+	}
+	print_env(*copy_env);
+	return (1);
+}
+
 char **copy_arr_env(t_data *data, t_env *env)
 {
 	t_env *tmp;
@@ -25,33 +57,6 @@ char **copy_arr_env(t_data *data, t_env *env)
 	return (data->arr_env);
 }
 
-t_env  *add_new_var2(char *environ)
-{
-	t_env *tmp;
-	int i;
-
-	i = ft_strindex(environ, '=');
-	tmp = (t_env*)malloc(sizeof(t_env));
-	if (tmp == NULL)
-		exit(EXIT_FAILURE);
-	tmp->value = ft_strdup(environ + i + 1);
-	tmp->name = ft_strnew(i);
-	tmp->next = NULL;
-	ft_strlcat(tmp->name, environ, i + 1);
-	return (tmp);
-}
-
-void	add_new_var(char *environ, t_data *data)
-{
-	t_env *tmp;
-	t_env *queue;
-	
-	tmp = add_new_var2(environ);
-	queue = data->env;
-	tmp->next = queue;
-	data->env = tmp;
-}
-
 int copyenv(t_data *data, char **environ)
 {
 	int i;
@@ -67,6 +72,5 @@ int copyenv(t_data *data, char **environ)
 		add_new_var(environ[i], data);
 		i--;
 	}
-	print_env(data->env);
 	return (1);
 }

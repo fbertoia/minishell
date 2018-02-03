@@ -121,6 +121,7 @@ char				**ft_strsplitwhitespace(char *str);
 
 int					size_list(void *a);
 void				*last_elem(void *a);
+int					str_alnum(char *str);
 
 # define MY_INT_MAX 2147483647
 # define MY_INT_MIN -2147483648

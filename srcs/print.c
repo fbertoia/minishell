@@ -12,13 +12,14 @@
 
 #include "minishell.h"
 
-void	print_env(t_env *env)
+int	print_env(t_env *env)
 {
 	while (env)
 	{
 		ft_printf("%s=%s\n", env->name, env->value);
 		env = env->next;
 	}
+	return (0);
 }
 
 void	print_arr_env(char **arr_env)
@@ -42,5 +43,7 @@ int	print_message(char *message, int fd)
 	if (ft_strequ(message, "EACCESS"))
 		ft_dprintf(fd, "Read or search permission was denied for a component of\
 the pathname.\n");
+	if (ft_strequ(message, "EINVAL"))
+		ft_dprintf(fd, "Invalid argument.\n");
 	return (1);
 }

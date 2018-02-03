@@ -15,7 +15,7 @@
 int g_sig;
 int g_prompt;
 
-int  main(int ac, char **av)
+int  main(void)
 {
 	t_data data;
 	extern char **environ;
@@ -28,6 +28,7 @@ int  main(int ac, char **av)
 	data.split_args = NULL;
 	data.old_dir[0] = '\0';
 	data.arr_env = NULL;
+	data.copy_env = NULL;
 	data.path = NULL;
 	copyenv(&data, environ);
 	signal(SIGINT, handlesig);
@@ -42,9 +43,11 @@ int  main(int ac, char **av)
 		if (data.split_args && data.split_args[0])
 		{
 			g_prompt = 0;
-			g_sig = callfunction(&data, &data.env);
+			g_sig = callfunction(data.split_args, &data, &data.env);
 		}
-		print_env(data.env);
+					ft_printf("%[GRN] MAIN%[NC]\n");
+
+		// print_env(data.copy_env);
 		del_args(&data.split_args);
 		del_args(&data.arr_env);
 		delete_env(&data.copy_env);
