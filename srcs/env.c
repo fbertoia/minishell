@@ -16,7 +16,6 @@ int ft_env(char *av[], t_env **env, t_data *data)
 	int a;
 
 	i = 1;
-	ft_printf("%[GRN]WITHIN%[NC]\n");
 	if (!av[i])
 		return (print_env(*env));
 	if (!data->copy_env)
@@ -33,12 +32,13 @@ int ft_env(char *av[], t_env **env, t_data *data)
 		{
 			if (!av[i])
 				return (print_env(*env));
-			change_var(&data->copy_env, "PATH", av[i++]);
+			if (data->path)
+				ft_memdel((void**)&data->path);
+			data->path = ft_strdup(av[i++]);
 		}
 		else
 			return (print_usage_env('P', 2));
 	}
-		ft_printf("%[GRN]2 - WITHIN%[NC]\n");
 	while (av[i] && ft_strequ(av[i], "-u"))
 	{
 		if (av[++i])
@@ -53,16 +53,14 @@ int ft_env(char *av[], t_env **env, t_data *data)
 	while (av[i] && (a = ft_strindex(av[i], '=')) >= 0)
 	{
 		if (av[i][0] == '=')
-			return (print_message("EINVAL", 2));
+			return (print_message("EINVAL", av[0]));
 		else
 		{
 			av[i][a] = '\0';
 			ft_setenv2(av[i], av[i] + a + 1, &data->copy_env);
 		}
 		if (!av[++i])
-			return (print_env(*env));
+			return (print_env(data->copy_env));
 	}
-	if (i == 1)
-		i = 0;
-	return (callfunction(av + i + 1, data, &data->copy_env));
+	return (callfunction(av + i, data, &data->copy_env));
 }

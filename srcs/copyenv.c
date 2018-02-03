@@ -28,7 +28,6 @@ int	ft_copyenvlist(t_env *src, t_env **copy_env)
 		tmp = tmp->next;
 		src = src->next;
 	}
-	print_env(*copy_env);
 	return (1);
 }
 

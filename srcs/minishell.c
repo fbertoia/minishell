@@ -45,11 +45,9 @@ int  main(void)
 			g_prompt = 0;
 			g_sig = callfunction(data.split_args, &data, &data.env);
 		}
-					ft_printf("%[GRN] MAIN%[NC]\n");
-
-		// print_env(data.copy_env);
 		del_args(&data.split_args);
 		del_args(&data.arr_env);
+		delstr(1, &data.path);
 		delete_env(&data.copy_env);
 		ft_memdel((void**)data.path);
 	}

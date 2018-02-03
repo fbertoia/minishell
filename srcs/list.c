@@ -35,7 +35,7 @@ t_env *new_env_var(char *name, char *value)
 		exit (EXIT_FAILURE);
 	tmp->next = 0;
 	tmp->name = ft_strdup(name);
-	if (*value)
+	if (value)
 		tmp->value = ft_strdup(value);
 	else
 		tmp->value = ft_strdup("");

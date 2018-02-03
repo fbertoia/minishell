@@ -19,14 +19,14 @@ void delstr(int nb_args, ...)
 {
   va_list ap;
   int i;
-  char *tmp;
+  char **tmp;
 
   i = 0;
   va_start(ap, nb_args);
   while (i < nb_args)
   {
-    tmp = va_arg(ap, char *);
-    ft_memdel((void**)&tmp);
+    tmp = va_arg(ap, char **);
+    ft_memdel((void**)tmp);
     i++;
   }
   va_end(ap);

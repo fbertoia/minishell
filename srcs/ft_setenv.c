@@ -5,12 +5,12 @@ int check_args(char **av)
 	char *str;
 
 	if (av[1] && av[2] && av[3])
-		str = "setenv: Too many arguments.";
-	else if (!str_alnum(av[1]) || !str_alnum(av[2]))
+		str = "setenv: Too many arguments.\n";
+	else if (!str_alnum(av[1]))
 		str = "setenv: Variable name must contain \
-alphanumeric characters.";
-	else if (!ft_isalpha(av[1][0]) || (av[1] && av[2] && !ft_isalpha(av[2][0])))
-		str = "setenv: Variable name must begin with a letter.";
+alphanumeric characters.\n";
+	else if (!ft_isalpha(av[1][0]))
+		str = "setenv: Variable name must begin with a letter.\n";
 	else
 		return (1);
 	write(2, str, ft_strlen(str));
@@ -43,5 +43,5 @@ int ft_setenv(char *av[], t_env **env, t_data *data)
 		print_arr_env(data->arr_env);
 	if (!check_args(av))
 		return (1);
-	return (ft_setenv2(av[1], av[2], env)); 
+	return (ft_setenv2(av[1], av[2], env));
 }

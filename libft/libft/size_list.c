@@ -26,4 +26,3 @@ int		size_list(void *a)
 	}
 	return (i);
 }
-

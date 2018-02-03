@@ -32,18 +32,23 @@ void	print_arr_env(char **arr_env)
 	}
 }
 
-int	print_message(char *message, int fd)
+int	print_message(char *message, char *function_name)
 {
 	if (ft_strequ(message, "malloc"))
-		ft_dprintf(fd, "Malloc failure.\n");
-	if (ft_strequ(message, "too many args"))
-		ft_dprintf(fd, "Too many arguments.\n");
-	if (ft_strequ(message, "ENAMETOOLONG"))
-		ft_dprintf(fd, "Name exceeded PATH_MAX limit.\n");
-	if (ft_strequ(message, "EACCESS"))
-		ft_dprintf(fd, "Read or search permission was denied for a component of\
-the pathname.\n");
-	if (ft_strequ(message, "EINVAL"))
-		ft_dprintf(fd, "Invalid argument.\n");
+		ft_dprintf(2, "Malloc failure.\n");
+	else if (ft_strequ(message, "ENAMETOOLONG"))
+		ft_dprintf(2, "%s: Name exceeded PATH_MAX limit.\n", function_name);
+	else if (ft_strequ(message, "EACCESS"))
+		ft_dprintf(2, "%s: permission denied.\n", function_name);
+	else if (ft_strequ(message, "EINVAL"))
+		ft_dprintf(2, "%s: Invalid argument.\n", function_name);
+	else if (ft_strequ(message, "ENOENT"))
+		ft_dprintf(2, "%s: No such file or directory.\n", function_name);
+	else if (ft_strequ(message, "ENOCMD"))
+		ft_dprintf(2, "%s: Command not found.\n", function_name);
+	else if (ft_strequ(message, "ENOMEN"))
+		ft_dprintf(2, "%s: Insufficient memory.\n", function_name);
+	else if (ft_strequ(message, "E2BIG"))
+		ft_dprintf(2, "%s: Too many arguments.\n", function_name);
 	return (1);
 }

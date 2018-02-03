@@ -25,7 +25,6 @@ int callfunction(char **args, t_data *data, t_env **env)
 	int i;
 
 	i = 0;
-	ft_printf("%[RED]Call function%[NC]\n");
 	if ((i = find_builtin(args[0])) >= 0)
 		return (ft_builtin[i](args, env, data));
 	else

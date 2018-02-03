@@ -28,6 +28,7 @@
 # include <limits.h>
 
 # define NUMBER_BUILTIN 6
+# define BUFF_SIZE_GNM 4096
 
 extern int g_sig;
 extern int g_prompt;
@@ -44,7 +45,6 @@ typedef struct    s_data
 {
 	int		i;
 	pid_t	parent;
-	struct stat *buf;
 	int		status;
 	char	*s;
 	char	**split_args;
@@ -87,7 +87,7 @@ void delstr(int nb_args, ...);
 void delete_env(t_env **env);
 char *ft_strjoin_multiple(int nb_args, ...);
 
-int	print_message(char *message, int fd);
+int	print_message(char *message, char *function_name);
 
 t_env *elem_name(t_env *env, char *str);
 

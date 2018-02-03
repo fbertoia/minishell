@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbertoia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/04 18:56:15 by fbertoia          #+#    #+#             */
-/*   Updated: 2017/09/04 18:57:08 by fbertoia         ###   ########.fr       */
+/*   Created: 2018/02/03 20:49:55 by fbertoia          #+#    #+#             */
+/*   Updated: 2018/02/03 20:50:35 by fbertoia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strcpy(char *dst, const char *src)
+char *ft_strndup(char *str, size_t size)
 {
-	int i;
+	char *tmp;
 
-	i = 0;
-	if (!dst || !src)
+	if (!str || size <= 0)
 		return (NULL);
-	while (src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = src[i];
-	return (dst);
+	tmp = (char *)malloc(sizeof(char) * size);
+	if (tmp == NULL)
+		exit (EXIT_FAILURE);
+	ft_strlcpy(tmp, str, size);
+	return (tmp);
 }
+
