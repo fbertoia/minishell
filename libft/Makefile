@@ -6,7 +6,7 @@
 #    By: fbertoia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/15 18:45:15 by fbertoia          #+#    #+#              #
-#    Updated: 2018/02/02 20:13:32 by fbertoia         ###   ########.fr        #
+#    Updated: 2018/02/04 00:13:47 by fbertoia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,11 @@ ft_insert_spaces.c ptr_color.c)
 OBJS_PRINTF = $(SRCS_PRINTF:$(DIR_PRINTF)/%.c=$(DIR_PRINTF)/obj/%.o)
 OBJS_LIBFT = $(SRCS_LIBFT:$(DIR_LIBFT)/%.c=$(DIR_LIBFT)/obj/%.o)
 
-all: $(NAME)
+all: library $(NAME)
+
+library:
+	@mkdir -p libft/obj
+	@mkdir -p ft_printf/obj
 
 $(NAME): $(OBJS_LIBFT) $(OBJS_PRINTF)
 	ar rsc $(NAME) $(OBJS_LIBFT) $(OBJS_PRINTF)
