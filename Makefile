@@ -6,13 +6,13 @@
 #    By: fbertoia <fbertoia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/16 11:38:20 by fbertoia          #+#    #+#              #
-#    Updated: 2018/02/03 17:18:52 by fbertoia         ###   ########.fr        #
+#    Updated: 2018/02/04 01:58:03 by fbertoia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 INCLUDES = includes
 INCLUDES_H = includes/minishell.h
 INCLUDES_LIBFT = ./libft/includes
