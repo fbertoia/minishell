@@ -14,8 +14,8 @@
 
 int		size_list(void *a)
 {
-	int i;
-	t_void *tmp;
+	int		i;
+	t_void	*tmp;
 
 	tmp = (t_void*)a;
 	i = 0;

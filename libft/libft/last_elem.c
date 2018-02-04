@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void *last_elem(void *a)
+void	*last_elem(void *a)
 {
 	t_void *tmp;
 

@@ -34,7 +34,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int fill_buf(char *buf, char **line, int index)
+static int	fill_buf(char *buf, char **line, int index)
 {
 	if (index >= 0)
 	{
@@ -49,7 +49,7 @@ static int fill_buf(char *buf, char **line, int index)
 	return (index >= 0);
 }
 
-static int concatenate(char *buf, char **line, int index)
+static int	concatenate(char *buf, char **line, int index)
 {
 	char *tmp;
 
@@ -65,7 +65,7 @@ static int concatenate(char *buf, char **line, int index)
 	return (1);
 }
 
-static int ft_read(char *buf, char **line, int fd)
+static int	ft_read(char *buf, char **line, int fd)
 {
 	int ret;
 	int index;
@@ -84,7 +84,7 @@ static int ft_read(char *buf, char **line, int fd)
 		return (2);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static char		*fdtab[OPEN_MAX];
 	int				ret;

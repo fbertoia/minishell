@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char *ft_strndup(char *str, size_t size)
+char	*ft_strndup(char *str, size_t size)
 {
 	char *tmp;
 
@@ -21,8 +21,7 @@ char *ft_strndup(char *str, size_t size)
 		return (NULL);
 	tmp = (char *)malloc(sizeof(char) * size);
 	if (tmp == NULL)
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	ft_strlcpy(tmp, str, size);
 	return (tmp);
 }
-

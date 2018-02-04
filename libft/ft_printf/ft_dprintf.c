@@ -32,4 +32,3 @@ int		ft_dprintf(int fd, const char *format, ...)
 	ft_buffalloc(&buf, &box, 2);
 	return (box.error == -1 ? box.error : box.ret);
 }
-

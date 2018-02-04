@@ -13,76 +13,83 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static int		word_count(char const *s, char c)
+static int		is_char(char to_compare, char c)
 {
-	int flag;
+	if (c == to_compare)
+		return (1);
+	return (0);
+}
+
+static int		wordcount(char *str, char c)
+{
 	int ret;
 
-	flag = 1;
 	ret = 0;
-	while (*s)
+	while (*str)
 	{
-		while (*s == c)
+		if (!is_char(*str, c))
 		{
-			s++;
-			flag = 1;
-		}
-		if (flag && *s)
 			ret++;
-		flag = 0;
-		if (*s)
-			s++;
+			while (*str && !is_char(*str, c))
+				str++;
+		}
+		if (*str && is_char(*str, c))
+			str++;
 	}
 	return (ret);
 }
 
-static char		*ft_creator(const char *s, char c, char ***ret, int flag)
+static int		size_word(char *str, char c)
 {
-	unsigned int	i;
-	size_t			j;
-	int				k;
+	int ret;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	while (s[i])
+	ret = 0;
+	while (is_char(*str, c))
+		str++;
+	while (*str && !is_char(*str, c))
 	{
-		while (s[i] == c)
-		{
-			i++;
-			flag = 1;
-		}
-		if (flag && s[i])
-		{
-			j = 0;
-			while (s[i + j] && s[i + j] != c)
-				j++;
-			if (((*ret)[k++] = ft_strsub(s, i, j)) == NULL)
-				return (NULL);
-		}
-		flag = 0;
-		if (s[i])
-			i++;
+		ret++;
+		str++;
 	}
-	return (**ret);
+	return (ret);
 }
 
-char			**ft_strsplit(char const *s, char c)
+static void		copy(char *ret, char **str, char c)
 {
-	int		a;
-	int		i;
-	char	**ret;
-	int		j;
+	int i;
 
 	i = 0;
-	j = 0;
-	if (!s)
+	while (is_char(**str, c))
+		(*str)++;
+	while (**str && !is_char(**str, c))
+	{
+		ret[i] = **str;
+		(*str)++;
+		i++;
+	}
+	ret[i] = '\0';
+}
+
+char			**ft_strsplit(char *str, char c)
+{
+	int		nb_word;
+	char	**arr;
+	int		i;
+
+	i = 0;
+	nb_word = wordcount(str, c);
+	if (!str)
 		return (NULL);
-	a = word_count(s, c);
-	if ((ret = (char **)malloc(sizeof(char *) * (a + 1))) == NULL)
+	if ((arr = (char **)malloc(sizeof(char*) * (nb_word + 1))) == NULL)
 		return (NULL);
-	if (ft_creator(s, c, &ret, 1) == NULL)
-		return (NULL);
-	ret[a] = NULL;
-	return (ret);
+	while (i < nb_word)
+	{
+		if ((arr[i] = (char*)malloc(sizeof(char) *
+			(size_word(str, c) + 1))) == NULL)
+			return (NULL);
+		copy(arr[i], &str, c);
+		i++;
+	}
+	arr[nb_word] = NULL;
+	return (arr);
 }

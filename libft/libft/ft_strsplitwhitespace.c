@@ -89,7 +89,6 @@ char			**ft_strsplitwhitespace(char *str)
 			return (NULL);
 		copy(arr[i], &str);
 		i++;
-
 	}
 	arr[nb_word] = NULL;
 	return (arr);
