@@ -36,10 +36,15 @@ extern int			g_prompt;
 typedef struct		s_env
 {
 	struct s_env	*next;
-	struct s_env	*previous;
 	char			*name;
 	char			*value;
 }					t_env;
+
+typedef struct		s_parser
+{
+	struct s_parser *next;
+	char			*arg;
+}					t_parser;
 
 typedef struct		s_data
 {
@@ -55,11 +60,16 @@ typedef struct		s_data
 	t_env			*copy_env;
 	char			**arr_env;
 	char			old_dir[PATH_MAX + 1];
+	t_parser		*parser;
+	int 			quotes;
 }					t_data;
 
-int					prompt(void);
+void				prompt(void*);
+
+int					parser(t_data *data);
 
 int					copyenv(t_data *data, char **environ);
+void				increase_shlvl(t_env *env);
 char				**copy_arr_env(t_data *data, t_env *env);
 int					ft_copyenvlist(t_env *src, t_env **copy_env);
 int					change_var(t_env **env, char *name, char *value);
@@ -87,6 +97,7 @@ int					ft_env(char *argv[], t_env **env, t_data *data);
 void				del_args(char ***arr);
 void				delstr(int nb_args, ...);
 void				delete_env(t_env **env);
+void				delete_parser(t_parser **parser);
 void				free_all(t_data *data);
 
 char				*ft_strjoin_multiple(int nb_args, ...);

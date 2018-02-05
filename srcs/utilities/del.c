@@ -59,10 +59,25 @@ void	delete_env(t_env **env)
 	}
 }
 
+void	delete_parser(t_parser **parser)
+{
+	t_parser *tmp;
+
+	tmp = *parser;
+	while (*parser)
+	{
+		*parser = (*parser)->next;
+		ft_memdel((void**)&tmp->arg);
+		ft_memdel((void**)&tmp);
+		tmp = *parser;
+	}
+}
+
 void	free_all(t_data *data)
 {
 	del_args(&data->split_args);
 	del_args(&data->arr_env);
 	delstr(1, &data->path);
 	delete_env(&data->copy_env);
+	delete_parser(&data->parser);
 }

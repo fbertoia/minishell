@@ -24,7 +24,6 @@ int		print_env(t_env *env)
 
 void	print_arr_env(char **arr_env)
 {
-	ft_printf("%[RED]PRINT_ARR_ENV%[NC]\n");
 	while (*arr_env)
 	{
 		ft_printf("%s\n", *arr_env);

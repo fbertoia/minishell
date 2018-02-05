@@ -12,34 +12,37 @@
 
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -g
 INCLUDES = includes
 INCLUDES_H = includes/minishell.h
 INCLUDES_LIBFT = ./libft/includes
-DIR_MINISHELL = srcs
-SRCS_MINISHELL = $(addprefix $(DIR_MINISHELL)/, minishell.c prompt.c cd.c \
+VPATH = ./obj:./srcs:./srcs/main:srcs/builtins:srcs/env:srcs/utilities
+SRCS_MINISHELL = minishell.c prompt.c cd.c \
 echo.c env.c ft_exit.c ft_setenv.c ft_unsetenv.c callsystem.c copyenv.c \
 callfunction.c handlesig.c del.c ft_strjoin_multiple.c print.c list.c addenv.c\
-change_var.c)
-
+change_var.c increase_shlvl.c parser.c
 LIB_DIR = ./libft
 LIB_PATH = $(LIB_DIR)/libft.a
 LIB_NAME = ft
-OBJS_MINISHELL = $(SRCS_MINISHELL:$(DIR_MINISHELL)/%.c=$(DIR_MINISHELL)/obj/%.o)
+OBJS = $(SRCS_MINISHELL:.c=.o)
+OBJS_WITH_PATH = $(OBJS:%.o=obj/%.o)
 
-all: library $(NAME)
+all: library directory $(NAME)
 
-$(NAME): $(OBJS_MINISHELL) $(LIB_PATH) $(INCLUDES_H)
-	$(CC) $(CFLAGS) $(OBJS_MINISHELL) -L$(LIB_DIR) -l$(LIB_NAME) -o $@
+$(NAME): $(OBJS) $(OBJS_WITH_PATH) $(LIB_PATH) $(INCLUDES_H)
+	$(CC) $(CFLAGS) $(OBJS_WITH_PATH)  -L$(LIB_DIR) -l$(LIB_NAME) -o $@
 
 library:
-	make -C $(LIB_DIR)
+	@make -C $(LIB_DIR)
 
-$(DIR_MINISHELL)/obj/%.o: $(DIR_MINISHELL)/%.c $(INCLUDES_H)
-	$(CC) -o $@ -c $(CFLAGS) $(CFLAGS_COL) -I$(INCLUDES) -I$(INCLUDES_LIBFT) $<
+directory:
+	@mkdir -p obj
+
+%.o: %.c $(INCLUDES_H)
+	$(CC) -o obj/$@ -c $(CFLAGS) $(CFLAGS_COL) -I$(INCLUDES) -I$(INCLUDES_LIBFT) $<
 
 clean:
-	rm -f $(OBJS_MINISHELL)
+	rm -f $(OBJS_WITH_PATH)
 	make -C ./libft clean
 
 fclean: clean

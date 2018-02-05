@@ -29,7 +29,9 @@ static void	initialize(t_data *data)
 	data->arr_env = NULL;
 	data->copy_env = NULL;
 	data->path = NULL;
+	data->parser = NULL;
 	copyenv(data, environ);
+	increase_shlvl(data->env);
 }
 
 int			main(void)
@@ -37,14 +39,16 @@ int			main(void)
 	t_data data;
 
 	initialize(&data);
-	signal(SIGINT, handlesig);
+	prompt((void*)&data);
+	// signal(SIGINT, handlesig);
 	while (42)
 	{
 		g_prompt = 1;
 		data.parent = 0;
-		prompt();
-		get_next_line(0, &data.s);
-		data.split_args = ft_strsplitwhitespace(data.s);
+		data.quotes = 0;
+		prompt(NULL);
+		g_sig = get_next_line(0, &data.s);
+		parser(&data);
 		ft_memdel((void**)&data.s);
 		if (data.split_args && data.split_args[0])
 		{
