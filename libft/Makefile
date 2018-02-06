@@ -6,7 +6,7 @@
 #    By: fbertoia <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/15 18:45:15 by fbertoia          #+#    #+#              #
-#    Updated: 2018/02/04 00:13:47 by fbertoia         ###   ########.fr        #
+#    Updated: 2018/02/06 10:37:55 by fbertoia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_swap.c \
 ft_tolower.c ft_toupper.c ft_max.c ft_abs.c ft_itoa_base.c ft_strrev.c \
 ft_strcapitalize.c ft_lstsize.c ft_strindex.c ft_strcdup.c ft_binsearch.c \
 ft_lstadd_back.c ft_strnindex.c ft_strlcpy.c ft_sortstrings.c get_next_line.c\
-ft_strsplitwhitespace.c size_list.c last_elem.c str_alnum.c ft_strndup.c)
+ft_strsplitwhitespace.c size_list.c last_elem.c str_alnum.c ft_strndup.c\
+ft_strjoin_multiple.c)
 
 SRCS_PRINTF = $(addprefix $(DIR_PRINTF)/, ft_printf.c ft_dprintf.c ft_print.c \
 ft_modifiers.c ft_flags.c ft_buffmgmt.c ft_box_initializer.c ptr_s.c ptr_smaj.c\

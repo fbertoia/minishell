@@ -100,8 +100,6 @@ void				delete_env(t_env **env);
 void				delete_parser(t_parser **parser);
 void				free_all(t_data *data);
 
-char				*ft_strjoin_multiple(int nb_args, ...);
-
 int					print_message(char *message,
 char *function_name);
 int					print_usage_env(char c, int option);
