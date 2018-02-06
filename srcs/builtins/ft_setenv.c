@@ -51,6 +51,7 @@ int			ft_setenv2(char *name, char *value, t_env **env)
 
 int			ft_setenv(char *av[], t_env **env, t_data *data)
 {
+	(void)data;
 	if (!av[1])
 		return (print_env(*env));
 	if (!check_args(av))

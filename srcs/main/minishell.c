@@ -40,7 +40,7 @@ int			main(void)
 
 	initialize(&data);
 	prompt((void*)&data);
-	// signal(SIGINT, handlesig);
+	signal(SIGINT, handlesig);
 	while (42)
 	{
 		g_prompt = 1;
