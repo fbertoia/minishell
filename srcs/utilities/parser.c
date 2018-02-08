@@ -76,7 +76,6 @@ static void		build_args(t_data *data, t_parser *parser, int size)
 		exit(print_message("malloc", ""));
 	while (i < size)
 	{
-		ft_printf("%[RED]BUILDER 2%[NC] Arg to print = |%s|\n", parser->arg);
 		data->split_args[i] = ft_strdup(parser->arg);
 		i++;
 		parser = parser->next;

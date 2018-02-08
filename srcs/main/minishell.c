@@ -30,14 +30,17 @@ static void	initialize(t_data *data)
 	data->copy_env = NULL;
 	data->path = NULL;
 	data->parser = NULL;
+	data->error = 0;
 	copyenv(data, environ);
 	increase_shlvl(data->env);
 }
 
 int			main(void)
 {
-	t_data data;
+	t_data	data;
+	int		error;
 
+	error = 0;
 	initialize(&data);
 	prompt((void*)&data);
 	signal(SIGINT, handlesig);
@@ -47,7 +50,8 @@ int			main(void)
 		data.parent = 0;
 		data.quotes = 0;
 		prompt(NULL);
-		g_sig = get_next_line(0, &data.s);
+		if ((data.error = get_next_line(0, &data.s)) == -1)
+			ft_exit(NULL, &data.env, &data);
 		parser(&data);
 		ft_memdel((void**)&data.s);
 		if (data.split_args && data.split_args[0])

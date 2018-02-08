@@ -12,7 +12,7 @@
 
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = includes
 INCLUDES_H = includes/minishell.h
 INCLUDES_LIBFT = ./libft/includes
@@ -27,16 +27,13 @@ LIB_NAME = ft
 OBJS = $(SRCS_MINISHELL:.c=.o)
 OBJS_WITH_PATH = $(OBJS:%.o=obj/%.o)
 
-all: library directory $(NAME)
+all: library $(NAME)
 
 $(NAME): $(OBJS) $(OBJS_WITH_PATH) $(LIB_PATH) $(INCLUDES_H)
 	$(CC) $(CFLAGS) $(OBJS_WITH_PATH)  -L$(LIB_DIR) -l$(LIB_NAME) -o $@
 
 library:
 	@make -C $(LIB_DIR)
-
-directory:
-	@mkdir -p obj
 
 %.o: %.c $(INCLUDES_H)
 	$(CC) -o obj/$@ -c $(CFLAGS) $(CFLAGS_COL) -I$(INCLUDES) -I$(INCLUDES_LIBFT) $<

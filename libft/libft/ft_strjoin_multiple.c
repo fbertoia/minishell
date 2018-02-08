@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdarg.h>
 
 char	*ft_strjoin_multiple(int nb_args, ...)
 {

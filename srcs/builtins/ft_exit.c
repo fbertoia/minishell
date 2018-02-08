@@ -15,9 +15,11 @@
 int		ft_exit(char *argv[], t_env **env, t_data *data)
 {
 	(void)env;
-	if (argv[1])
+	if (argv && argv[1])
 		return (print_message("E2BIG", argv[0]));
 	free_all(data);
 	delete_env(&data->env);
+	if (data->error == -1)
+		exit(print_message("EBADF", "stdin"));
 	exit(EXIT_SUCCESS);
 }

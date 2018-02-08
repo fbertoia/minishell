@@ -13,7 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "minishell.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -61,10 +60,11 @@ typedef struct		s_data
 	char			**arr_env;
 	char			old_dir[PATH_MAX + 1];
 	t_parser		*parser;
-	int 			quotes;
+	int				quotes;
+	int				error;
 }					t_data;
 
-void				prompt(void*);
+void				prompt(void *data);
 
 int					parser(t_data *data);
 

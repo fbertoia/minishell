@@ -49,6 +49,8 @@ int		print_message(char *message, char *function_name)
 		ft_dprintf(2, "%s: Insufficient memory.\n", function_name);
 	else if (ft_strequ(message, "E2BIG"))
 		ft_dprintf(2, "%s: Too many arguments.\n", function_name);
+	else if (ft_strequ(message, "EBADF"))
+		ft_dprintf(2, "%s: Bad file descriptor.\n", function_name);
 	return (1);
 }
 
